@@ -13,6 +13,15 @@ var diceRoll = function(){ //simulates RNG 1-6
   } else {
     return number;
     tempScore = tempScore + number;
+  };
+};
+
+var outputScore = function(){
+  if (currentUser === user0.userName){
+    return "#player1score";
+  } else {
+    return "#player2score";
+  }
 }
 
 var turnDetermine = function(input){
@@ -26,23 +35,25 @@ var turnDetermine = function(input){
       currentUser = user0.userName;
       currentScore = user0.userScore;
     };
-  } else if (hold === true){
-  	console.log("hold determined true")
-    if (currentUser === user0.userName){
-      user0.userScore = user0.userScore + tempScore;
-      tempScore = 0;
-      currentUser = user1.userName;
-      currentScore = user1.userScore;
-      hold = false;
-    } else {
-      user1.userScore = user1.userScore + tempScore;
-      tempScore = 0;
-      currentUser = user0.userName;
-      currentScore = user0.userScore;
-      hold = false;
-    };
   };
 };
+
+var userHold = function() {
+	console.log("hold determined true")
+  if (currentUser === user0.userName){
+    user0.userScore = user0.userScore + tempScore;
+    tempScore = 0;
+    currentUser = user1.userName;
+    currentScore = user1.userScore;
+  } else {
+    user1.userScore = user1.userScore + tempScore;
+    tempScore = 0;
+    currentUser = user0.userName;
+    currentScore = user0.userScore;
+  };
+};
+
+
 
 var victoryCheck = function(){
   var scoreTotal = currentScore + tempScore
@@ -55,7 +66,15 @@ var victoryCheck = function(){
 //frontendery
 
 $(document).ready(function() {
-  $("#roll").click(function() {
-    diceroll();
-    victory();
+  $("#roll-button").click(function() {
+    diceRoll();
+    victoryCheck();
     turnDetermine();
+  });
+  $("#hold-button").click(function() {
+    userHold();
+    var outputUser = outputScore();
+    $(outputUser).empty();
+    $(outputUser).text(currentScore);
+  });
+});
