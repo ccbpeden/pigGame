@@ -12,6 +12,16 @@
     <div class="container">
       <form class="" action="index.html" method="post">
         <div class="row">
+          <div class="dice-number">
+            <h2>How many dice do you want to play with?</h2>
+            <select class="form-control" id="dice-control">
+              <option value="1">1 die</option>
+              <option value="2">2 dice</option>
+              <option value="3">3 dice</option>
+              <option value="5">5 dice</option>
+            </select>
+            <button type="button" id="dice-submit" name="button">This Many</button>
+          </div>
           <div class="col-md-6">
             <h1><span id="player1name"></span>Player 1</h1>
             <h2>Score: <span id="player1score"></span></h2>
