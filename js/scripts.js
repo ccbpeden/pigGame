@@ -1,8 +1,8 @@
 var tempScore = 0;
-var user0 = {userName: "Player 1", userScore: 90};
-var user1 = {userName: "Player 2", userScore: 90};
+var user0 = {userName: "Player 1", userScore: 0};
+var user1 = {userName: "Player 2", userScore: 0};
 var currentUser = "Player 1";
-var currentScore = 5;
+var currentScore = 0;
 var input = true;
 var hold = true;
 
@@ -39,14 +39,16 @@ var turnDetermine = function(input){
 };
 
 var userHold = function() {
-	console.log("hold determined true")
+	console.log(currentUser)
   if (currentUser === user0.userName){
     user0.userScore = user0.userScore + tempScore;
+    console.log("user0 " + user0.userScore)
     tempScore = 0;
     currentUser = user1.userName;
     currentScore = user1.userScore;
   } else {
     user1.userScore = user1.userScore + tempScore;
+    console.log("user1 " + user1.userScore)
     tempScore = 0;
     currentUser = user0.userName;
     currentScore = user0.userScore;
@@ -82,8 +84,12 @@ $(document).ready(function() {
   });
   $("#hold-button").click(function() {
     userHold();
+    $("#player1score").empty().text(user0.userScore);
+    $("#player2score").empty().text(user1.userScore);
     var outputUser = outputScore();
     $(outputUser).empty().text(currentScore);
     $("#current-user").empty().text(currentUser);
+    $("#temp-roll").empty();
+    $("#temp-score").empty();
   });
 });
