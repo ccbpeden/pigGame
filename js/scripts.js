@@ -1,21 +1,44 @@
 var tempScore = 0;
 var user0 = {userName: "Player 1", userScore: 0};
 var user1 = {userName: "Player 2", userScore: 0};
+var rolls = [];
 var currentUser = "Player 1";
 var currentScore = 0;
 var input = true;
 var hold = true;
 
-var diceRoll = function(){ //simulates RNG 1-6
-  var number = parseInt(1 + Math.floor(Math.random() * 6));
-  if (number === 1){
-    tempScore = 0;
-    return number;
-  } else {
-    tempScore = tempScore + number;
-    return number;
+var variableDice = function(input){
+  for (var i = 0; i < input; i += 1){
+    var number = parseInt(1 + Math.floor(Math.random() * 6));
+    if (number === 1){
+      tempScore = 0;
+			rolls.push(number);
+    } else {
+      tempScore = tempScore + number;
+      console.log("tempScore is " + tempScore);
+      rolls.push(number);
+    };
   };
+  console.log(rolls)
+  for(var i = 0; i < rolls.length; i++){
+  	console.log("rolls[i]")
+ 	 if (rolls[i] === 1){
+ 	 	tempScore = 0;
+	  };
+  };
+  console.log(tempScore);
 };
+
+// var diceRoll = function(){ //simulates RNG 1-6
+//   var number = parseInt(1 + Math.floor(Math.random() * 6));
+//   if (number === 1){
+//     tempScore = 0;
+//     return number;
+//   } else {
+//     tempScore = tempScore + number;
+//     return number;
+//   };
+// };
 
 var outputScore = function(){
   if (currentUser === user0.userName){
@@ -74,8 +97,8 @@ $(document).ready(function() {
   $("#current-user").empty().text(currentUser);
 
   $("#roll-button").click(function() {
-    var tempRoll = diceRoll();
-    $("#temp-roll").empty().text(tempRoll);
+    variableDice();
+    $("#temp-roll").empty().text(rolls);
     $("#temp-score").empty().text(tempScore);
     victoryCheck();
     turnDetermine(tempRoll);
