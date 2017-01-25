@@ -12,6 +12,7 @@ var diceRoll = function(){ //simulates RNG 1-6
     return false;
   } else {
     return number;
+    tempScore = tempScore + number;
 }
 
 var turnDetermine = function(input){
@@ -32,11 +33,29 @@ var turnDetermine = function(input){
       tempScore = 0;
       currentUser = user1.userName;
       currentScore = user1.userScore;
+      hold = false;
     } else {
       user1.userScore = user1.userScore + tempScore;
       tempScore = 0;
       currentUser = user0.userName;
       currentScore = user0.userScore;
+      hold = false;
     };
   };
 };
+
+var victoryCheck = function(){
+  var scoreTotal = currentScore + tempScore
+  if (scoreTotal >= 100){
+    //victory action
+    $("#victory").slideDown();
+  };
+};
+
+//frontendery
+
+$(document).ready(function() {
+  $("#roll").click(function() {
+    diceroll();
+    victory();
+    turnDetermine();
