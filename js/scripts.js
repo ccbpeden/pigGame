@@ -1,18 +1,19 @@
 var tempScore = 0;
-var user0 = {userName: "jay", userScore: 27};
-var user1 = {userName: "charlie", userScore: 5};
-var currentUser = "charlie";
+var user0 = {userName: "Player 1", userScore: 90};
+var user1 = {userName: "Player 2", userScore: 90};
+var currentUser = "Player 1";
 var currentScore = 5;
 var input = true;
 var hold = true;
 
 var diceRoll = function(){ //simulates RNG 1-6
-  var number = 1 + Math.floor(Math.random() * 6);
-  if (number == 1){
-    return false;
-  } else {
+  var number = parseInt(1 + Math.floor(Math.random() * 6));
+  if (number === 1){
+    tempScore = 0;
     return number;
+  } else {
     tempScore = tempScore + number;
+    return number;
   };
 };
 
@@ -25,8 +26,7 @@ var outputScore = function(){
 }
 
 var turnDetermine = function(input){
-  if (input === false){
-    tempScore = 0;
+  if (input === 1){
     if (currentUser === user0.userName){
     console.log("input determined false")
       currentUser = user1.userName;
@@ -58,23 +58,32 @@ var userHold = function() {
 var victoryCheck = function(){
   var scoreTotal = currentScore + tempScore
   if (scoreTotal >= 100){
+    alert("winner winner")
     //victory action
-    $("#victory").slideDown();
+    $(".victory").slideDown();
   };
 };
 
 //frontendery
 
 $(document).ready(function() {
+  $("#player1score").empty().text(user0.userScore);
+  $("#player2score").empty().text(user1.userScore);
+  $("#current-user").empty().text(currentUser);
+
   $("#roll-button").click(function() {
-    diceRoll();
+    var tempRoll = diceRoll();
+    $("#temp-roll").empty().text(tempRoll);
+    $("#temp-score").empty().text(tempScore);
     victoryCheck();
-    turnDetermine();
+    turnDetermine(tempRoll);
+    $("#current-user").empty().text(currentUser);
+
   });
   $("#hold-button").click(function() {
     userHold();
     var outputUser = outputScore();
-    $(outputUser).empty();
-    $(outputUser).text(currentScore);
+    $(outputUser).empty().text(currentScore);
+    $("#current-user").empty().text(currentUser);
   });
 });
