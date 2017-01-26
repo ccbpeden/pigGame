@@ -81,9 +81,11 @@ var turnDetermine = function(input){
     console.log("input determined false")
       currentUser = user1.userName;
       currentScore = user1.userScore;
+      $("#interface").hide().toggleClass("player2").fadeIn();
     } else {
       currentUser = user0.userName;
       currentScore = user0.userScore;
+      $("#interface").hide().toggleClass("player2").fadeIn();
     };
   };
 };
@@ -96,12 +98,14 @@ var userHold = function() {
     tempScore = 0;
     currentUser = user1.userName;
     currentScore = user1.userScore;
+    $("#interface").hide().toggleClass("player2").fadeIn();
   } else {
     user1.userScore = user1.userScore + tempScore;
     console.log("user1 " + user1.userScore)
     tempScore = 0;
     currentUser = user0.userName;
     currentScore = user0.userScore;
+    $("#interface").hide().toggleClass("player2").fadeIn();
   };
 };
 
