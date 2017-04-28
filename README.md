@@ -8,8 +8,8 @@ _A pig dice game_
 
 ## Setup/Installation Requirements
 
-* _this can also be found at https://ccbpeden.github.com/checkboxpractice/_
-* _open checkboxpractice/index.html in a web browser_
+* _this can also be found at https://ccbpeden.github.com/pigGame/_
+* _open pigGame/index.html in a web browser_
 
 ##Test Specs
 * system identifies two seperate players with seperate scores 
